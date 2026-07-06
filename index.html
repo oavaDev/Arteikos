@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte Arteikos S.A.S.</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Chart.js para gráficos interactivos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Clases dinámicas para los enlaces del menú (manejadas por JS) */
+        .menu-link.active {
+            background-color: #2563eb;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+        .menu-link:not(.active) {
+            color: #475569;
+        }
+        .menu-link:not(.active):hover {
+            background-color: #e2e8f0;
+            color: #0f172a;
+        }
+        
+        /* Utilidades para ocultar scrollbars si es necesario */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        
+        /* Justificar todos los textos del contenido principal */
+        main p, main ul > li {
+            text-align: justify;
+            hyphens: auto; /* Para un mejor justificado si el navegador lo soporta */
+        }
+        
+        /* Formato APA para referencias (sangría francesa) */
+        .apa-reference {
+            padding-left: 2em;
+            text-indent: -2em;
+            margin-bottom: 0.8em;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-white text-slate-800 font-sans flex flex-col lg:flex-row">
+
+    <!-- Mobile Header -->
+    <header class="lg:hidden sticky top-0 z-50 bg-white border-b border-slate-200 px-4 py-4 flex justify-between items-center shadow-sm">
+        <h1 class="text-xl font-bold text-blue-900 tracking-tight">ARTEIKOS S.A.S.</h1>
+        <button id="mobile-menu-btn" class="p-2 bg-slate-100 rounded-md text-slate-600 hover:bg-slate-200 focus:outline-none transition-colors">
+            <i class="ph ph-list text-2xl" id="menu-icon"></i>
+        </button>
+    </header>
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar" class="fixed inset-y-0 left-0 z-40 w-72 bg-slate-50 border-r border-slate-200 transform -translate-x-full transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:h-screen lg:sticky lg:top-0">
+        <div class="h-full flex flex-col">
+            <div class="p-6 hidden lg:block border-b border-slate-200">
+                <h1 class="text-2xl font-extrabold text-blue-900 tracking-tight">ARTEIKOS<span class="text-blue-600">.</span></h1>
+                <p class="text-xs text-slate-500 mt-1 uppercase tracking-wider font-semibold">Reporte Empresarial</p>
+            </div>
+            
+            <nav class="flex-1 overflow-y-auto py-4 no-scrollbar">
+                <ul class="space-y-1 px-3" id="nav-menu">
+                    <li><button onclick="scrollToSection('acerca-de-nosotros')" data-target="acerca-de-nosotros" class="menu-link w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors">ACERCA DE NOSOTROS</button></li>
+                    <li><button onclick="scrollToSection('contexto-del-sector')" data-target="contexto-del-sector" class="menu-link w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors">CONTEXTO DEL SECTOR</button></li>
+                    <li><button onclick="scrollToSection('business-model-canvas')" data-target="business-model-canvas" class="menu-link w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors">BUSINESS MODEL CANVAS</button></li>
+                    <li><button onclick="scrollToSection('diagnostico-internacionalizacion')" data-target="diagnostico-internacionalizacion" class="menu-link w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors">Diagnóstico de Potencialidades</button></li>
+                    <li><button onclick="scrollToSection('analisis-dofa')" data-target="analisis-dofa" class="menu-link w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors">Análisis DOFA</button></li>
+                    <li><button onclick="scrollToSection('sostenibilidad')" data-target="sostenibilidad" class="menu-link w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors">Sostenibilidad</button></li>
+                    <li><button onclick="scrollToSection('preseleccion-mercados')" data-target="preseleccion-mercados" class="menu-link w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors">Preselección de mercados</button></li>
+                    <li><button onclick="scrollToSection('viabilidad')" data-target="viabilidad" class="menu-link w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors">Viabilidad de internacionalización</button></li>
+                    <li><button onclick="scrollToSection('objetivo-smart')" data-target="objetivo-smart" class="menu-link w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors">Objetivo SMART</button></li>
+                    <li><button onclick="scrollToSection('entorno-macroeconomico')" data-target="entorno-macroeconomico" class="menu-link w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors">Análisis del entorno macroeconómico</button></li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 px-4 py-8 lg:px-12 lg:py-12 max-w-5xl mx-auto w-full">
+        <div class="mb-12 border-b border-slate-200 pb-8">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900">Estudio de la Realidad Empresarial</h1>
+        </div>
+
+        <!-- 1. ACERCA DE NOSOTROS -->
+        <section id="acerca-de-nosotros" class="mb-20 scroll-mt-24 section-observe">
+            <h2 class="text-3xl font-bold text-slate-800 mb-6 flex items-center gap-3">
+                <span class="bg-blue-100 text-blue-700 p-2 rounded-lg"><i class="ph ph-globe-hemisphere-west text-2xl"></i></span>
+                ACERCA DE NOSOTROS
+            </h2>
+            <div class="prose prose-slate max-w-none text-lg leading-relaxed text-slate-600">
+                <p><strong>ARTEIKOS S.A.S.</strong> con sede en Medellín, Antioquia. También llamado bajo la marca comercial RYAD para su línea de ropa deportiva de marca propia, y la línea Leggins Aquafit para ropa deportiva femenina.</p>
+                <p>Lo que hace innovadora a la propuesta no es el producto en sí (uniformes deportivos), sino la combinación de tres elementos que rara vez coexisten en una pyme de confección colombiana: personalización total por cliente (diseño, tallaje de 4 a 5XL), una reputación de cumplimiento medible y verificable (97-100% de calificación como proveedor de Comfama durante 4 años consecutivos), y una internacionalización ya en marcha hacia el Caribe de habla hispana, construida sobre relaciones de confianza más que sobre estructura comercial formal.</p>
+            </div>
+        </section>
+
+        <!-- 2. CONTEXTO DEL SECTOR -->
+        <section id="contexto-del-sector" class="mb-20 scroll-mt-24 section-observe">
+            <h2 class="text-3xl font-bold text-slate-800 mb-8 border-b border-slate-200 pb-4">CONTEXTO DEL SECTOR</h2>
+            
+            <div class="space-y-8">
+                <div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4">Descripción detallada del bien y/o servicio que ofrece</h3>
+                    <p class="text-slate-600 mb-4 leading-relaxed">Arteikos es una empresa manufacturera y comercializadora especializada en el diseño, corte, impresión digital y sublimación de uniformes deportivos y artículos complementarios. Arteikos trabaja casi exclusivamente con sublimación sobre poliéster, una técnica que exige esa fibra específica.</p>
+                    <p class="text-slate-600 font-semibold mb-2">Su portafolio cubre:</p>
+                    <ul class="list-disc pl-6 space-y-2 text-slate-600 marker:text-blue-500">
+                        <li><strong>Uniformes de competencia y presentación</strong> para fútbol, futsal, baloncesto, voleibol, entre otros deportes, que son destinados a clubes, ligas, torneos masivos (como Calleja Shopping, con cerca de 6.000 niños, o Atlético Nacional, con cerca de 2.000) y clientes corporativos como Comfama, Renault, Banacol y Greenland.</li>
+                        <li><strong>Línea institucional/educativa</strong> vía el convenio con Comfama, para colegios afiliados.</li>
+                        <li><strong>Ropa deportiva de marca propia (RYAD, Aquafit)</strong>, un canal de venta directa al consumidor que, vale la pena decirlo con honestidad, no ha logrado la tracción que sí tienen sus líneas institucionales.</li>
+                        <li><strong>Implementos deportivos complementarios:</strong> balones, conos, escaleras de coordinación, maletines, gorras y medias.</li>
+                    </ul>
+                    <p class="text-slate-600 mt-4 leading-relaxed bg-slate-50 p-4 rounded-lg border border-slate-100">
+                        Toda la producción es sobre pedido (mínimo 20 unidades en mercado nacional, 50 en exportación): Arteikos no maneja inventario para venta al detal, lo cual reduce su riesgo financiero, pero también limita su capacidad de capturar ventas impulsivas.<br><br>
+                        La empresa realiza internamente las etapas de diseño, corte, impresión y sublimación, y subcontrata la confección y el bordado a una red estable de 25-30 talleres satélite, con quienes mantiene relaciones de exclusividad a cambio de trabajo garantizado durante todo el año.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4">DESEMPEÑO FINANCIERO Y CAPACIDAD</h3>
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
+                        <p class="text-slate-700 leading-relaxed">La organización registra una utilidad neta de USD 22 a USD 24 por unidad, generando un flujo de caja (EBITDA) positivo. Existe una capacidad instalada de 180.000 unidades anuales, frente a una ejecución de 20.000 unidades, evidenciando un alto margen para escalar sin inversión en capital fijo.</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4">Contexto del sector y mercado nacional actual</h3>
+                    <p class="text-slate-600 mb-4 leading-relaxed">El sector textil-confecciones es estratégico para Colombia: representa el 9,4% del PIB industrial y genera empleo para más de 600.000 personas en el país (Procolombia, 2023). En 2025 el sector mostró señales claras de recuperación, con un crecimiento del PIB sectorial de 6,6% (equivalente a $10,6 billones) y un consumo récord de $36,7 billones en confecciones, textiles, calzado y bisutería (Sectorial, 2026).</p>
+                    <p class="text-slate-600 leading-relaxed">El segmento específico de ropa deportiva es uno de los más dinámicos: las ventas de ropa deportiva en Colombia superan los US$1.500 millones anuales, con una proyección de crecimiento del 6% hasta 2026, según estimaciones de Euromonitor (citado en El Colombiano, 2026a). El Mundial 2026 está actuando como catalizador inmediato: se proyecta que las ventas de ropa deportiva de empresas en Colombia crezcan hasta un 30% por el mayor tráfico en tiendas, las colecciones especiales y las compras por impulso ligadas al fanatismo deportivo (El Colombiano, 2026a). De hecho, el Observatorio de Moda de Inexmoda registró un crecimiento de 6,33% en la categoría sportswear/activewear solo en el último trimestre de 2025, explicado por el auge del lifestyle activo y el incremento de compras asociadas a eventos internacionales (El Colombiano, 2026a).</p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4">COMPETITIVIDAD</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                            <p class="text-slate-600 leading-relaxed"><strong>Desarrollo de textiles técnicos</strong> (protección solar, control de humedad, antibacterial). La integración de poliéster reciclado posiciona a la empresa estratégicamente ante las normativas ambientales internacionales, justificando márgenes premium en mercados desarrollados.</p>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                            <p class="text-slate-600 leading-relaxed"><strong>A nivel nacional</strong>, compite contra la entrada masiva de ropa deportiva importada de bajo costo desde plataformas asiáticas —favorecida por la suspensión judicial del Decreto 1475, que mantiene el umbral de exención de IVA en US$200 e introduce unos 400.000 kilos diarios de mercancía asiática al país (Analisis Sectorial, 2026)— y contra marcas globales como Nike, Adidas y Decathlon, que dominan el retail masivo con mayor capacidad de inversión en mercadeo y patrocinios; solo el contrato de Adidas con la Federación Colombiana de Fútbol está valorado en más de US$75 millones hasta 2030 (Valora Analitik, 2025). Frente a ellas, Arteikos no compite en precio ni en volumen, sino en personalización y cumplimiento, debido a esto es que su negocio más sólido es el institucional, no el de consumidor final.</p>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                            <p class="text-slate-600 leading-relaxed"><strong>A nivel internacional</strong>, el mercado real de Arteikos hoy no es genérico ni global: es el Caribe de habla hispana (Bonaire, Curazao, Aruba), donde no compite contra Nike sino contra la ausencia de oferta local de calidad similar.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. BUSINESS MODEL CANVAS -->
+        <section id="business-model-canvas" class="mb-20 scroll-mt-24 section-observe">
+            <h2 class="text-3xl font-bold text-slate-800 mb-4">Business Model Canvas</h2>
+            <p class="text-slate-600 mb-8">El siguiente lienzo resume los nueve bloques del modelo de negocio de Arteikos S.A.S., construido a partir de la investigación documental y de la entrevista con la gerencia comercial de la empresa.</p>
+            
+            <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                <h3 class="text-center font-bold text-lg mb-6 uppercase text-slate-700">Modelo de Negocio de Arteikos</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                        <h4 class="font-bold text-slate-800 mb-2 border-b pb-2">8. SOCIOS CLAVE</h4>
+                        <ul class="list-disc pl-4 space-y-1 text-slate-600">
+                            <li>Comfama: relación de +10 años, principal cliente institucional.</li>
+                            <li>Talleres de confección y bordado exclusivos.</li>
+                            <li>Gold Cargo SAS: agente de carga para exportaciones formales.</li>
+                            <li>CEIPA y ProColombia: apoyo en internacionalización.</li>
+                            <li>Proveedores de telas técnicas.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                        <h4 class="font-bold text-slate-800 mb-2 border-b pb-2">7. ACTIVIDADES CLAVE</h4>
+                        <ul class="list-disc pl-4 space-y-1 text-slate-600">
+                            <li>Diseño, corte, impresión digital y sublimación (100% interno).</li>
+                            <li>Confección y bordado: subcontratados a talleres satélite.</li>
+                            <li>Control de calidad: muestras previas e inspección.</li>
+                            <li>Gestión comercial y trámites de exportación.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-blue-900 p-4 rounded-xl shadow-sm text-white">
+                        <h4 class="font-bold mb-2 border-b border-blue-700 pb-2">2. PROPUESTA DE VALOR</h4>
+                        <ul class="list-disc pl-4 space-y-1 text-blue-100">
+                            <li>Diseño 100% personalizado por cliente.</li>
+                            <li>Sublimación en poliéster: colores brillantes, durabilidad +2 años.</li>
+                            <li>Confiabilidad: calificación por parte de Comfama de 97-100% en los últimos 4 años.</li>
+                            <li>Tallaje amplio: de la talla 4 a la 5XL, masculino y femenino.</li>
+                            <li>Relación de confianza de largo plazo.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                        <h4 class="font-bold text-slate-800 mb-2 border-b pb-2">4. RELACIÓN CON CLIENTES</h4>
+                        <ul class="list-disc pl-4 space-y-1 text-slate-600">
+                            <li>Propuesta de diseño antes de confirmar producción.</li>
+                            <li>Relación personal de largo plazo con clientes recurrentes.</li>
+                            <li>Pago 50% anticipo + 50% contra entrega en exportación.</li>
+                            <li>Exclusividad de diseño por torneo/cancha.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                        <h4 class="font-bold text-slate-800 mb-2 border-b pb-2">1. SEGMENTOS DE CLIENTES</h4>
+                        <ul class="list-disc pl-4 space-y-1 text-slate-600">
+                            <li>Clubes y equipos amateur.</li>
+                            <li>Clientes corporativos: Comfama, Renault, Anacol, Greenland.</li>
+                            <li>Torneos masivos: Calleja Shopping (~6.000 niños), Atlético Nacional (~2.000).</li>
+                            <li>Colegios e instituciones educativas.</li>
+                            <li>Clientes internacionales: Bonaire, Curazao, Puerto Rico, E.E.U.U., etc.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                        <h4 class="font-bold text-slate-800 mb-2 border-b pb-2">6. RECURSOS CLAVE</h4>
+                        <ul class="list-disc pl-4 space-y-1 text-slate-600">
+                            <li>Maquinaria propia de diseño, corte, impresión digital y sublimación.</li>
+                            <li>Equipo humano: 12 personas internas.</li>
+                            <li>Red de ~25-30 confeccionistas externos exclusivos.</li>
+                            <li>Capacidad instalada: 15.000 uniformes/mes (180.000 al año)</li>
+                            <li>Maquinaria moderna.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                        <h4 class="font-bold text-slate-800 mb-2 border-b pb-2">3. CANALES</h4>
+                        <ul class="list-disc pl-4 space-y-1 text-slate-600">
+                            <li>Boca a boca y referidos: el canal más fuerte.</li>
+                            <li>Venta directa: mailing, WhatsApp y llamadas.</li>
+                            <li>Redes sociales orgánicas.</li>
+                            <li>Eventos institucionales (feria Adecopria).</li>
+                            <li>Exportación vía courier (95% de envíos internacionales)</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                        <h4 class="font-bold text-slate-800 mb-2 border-b pb-2">9. ESTRUCTURA DE COSTOS</h4>
+                        <ul class="list-disc pl-4 space-y-1 text-slate-600">
+                            <li>Telas de poliéster (130-160 g) e insumos de sublimación.</li>
+                            <li>Pago a talleres externos de confección y bordado.</li>
+                            <li>Mano de obra interna y mantenimiento de maquinaria.</li>
+                            <li>Logística de exportación vía Courier.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                        <h4 class="font-bold text-slate-800 mb-2 border-b pb-2">5. FUENTES DE INGRESO</h4>
+                        <ul class="list-disc pl-4 space-y-1 text-slate-600">
+                            <li>Venta de uniformes personalizados por pedido.</li>
+                            <li>Contratos institucionales recurrentes.</li>
+                            <li>Exportación: ~25% de la facturación.</li>
+                            <li>Venta directa con marca propia RYAD.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Diagnóstico de Potencialidades -->
+        <section id="diagnostico-internacionalizacion" class="mb-20 scroll-mt-24 section-observe">
+            <h2 class="text-3xl font-bold text-slate-800 mb-6 border-b border-slate-200 pb-4">Diagnóstico de Potencialidades de Internacionalización</h2>
+            <p class="text-slate-600 leading-relaxed mb-4">
+                Según el Diagnóstico De Potencialidades De Internacionalización (DPI) la empresa ARTEIKOS se encuentra en una etapa de preparación intermedia. Tiene una oferta comercial fuerte, pero carece del soporte estratégico, normativo y humano necesario para mitigar los riesgos de salir al exterior.
+            </p>
+            
+            <div class="my-8 flex justify-center bg-white p-4 rounded-xl shadow-sm border border-slate-200 w-full max-w-2xl mx-auto relative h-[400px]">
+                <canvas id="radarChart"></canvas>
+            </div>
+
+            <div class="bg-indigo-50 p-6 rounded-xl border border-indigo-100">
+                <h4 class="font-bold text-indigo-900 mb-2">ANALISIS DPI:</h4>
+                <p class="text-slate-700 leading-relaxed">
+                    La empresa cuenta con una sólida ventaja comercial basada en un producto con alto potencial internacional (65.18%), un buen conocimiento de sus competidores (64.89%) y una base tecnológica aceptable (44.44%); sin embargo, su expansión global está fuertemente limitada por deficiencias estructurales internas. Su mayor urgencia es la sostenibilidad (25.00%), ya que carece de las certificaciones ASG necesarias para ingresar a mercados exigentes como Europa o EE. UU., una debilidad que se suma a la falta de personal operativo bilingüe (31.41%), la ausencia de un departamento formal de comercio exterior (33.33%) y la necesidad de blindar sus desarrollos mediante propiedad intelectual y presupuestos exclusivos (42.11%). En conclusión, aunque el producto y la inteligencia de mercado están listos, la organización debe priorizar la transición hacia prácticas verdes y la profesionalización de su estructura si quiere que la internacionalización sea viable y segura, también establecer estrategias y metas de aprovechamiento de la tecnología e innovación.
+                </p>
+            </div>
+        </section>
+
+        <!-- 5. Análisis DOFA -->
+        <section id="analisis-dofa" class="mb-20 scroll-mt-24 section-observe">
+            <h2 class="text-3xl font-bold text-slate-800 mb-6 flex items-center gap-3 border-b border-slate-200 pb-4">
+                <span class="bg-emerald-100 text-emerald-700 p-2 rounded-lg"><i class="ph ph-target text-2xl"></i></span>
+                Análisis DOFA
+            </h2>
+            <p class="text-slate-600 mb-8">Con base en el diagnóstico anterior, identifica:</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                <!-- Fortalezas -->
+                <div class="bg-green-50 rounded-2xl p-6 border border-green-200">
+                    <h3 class="text-xl font-bold text-green-800 mb-4 uppercase">Fortalezas</h3>
+                    <ul class="space-y-3 text-sm text-green-900">
+                        <li><strong>Un Producto con alto potencial:</strong> Su principal motor es la oferta comercial, cuenta con ventajas competitivas claras y adaptabilidad para ser atractivo en mercados internacionales (DPI Arteikos, 2026). Confiabilidad demostrada con clientes institucionales, Capacidad de personalización total del producto. (entrevista con la gerencia comercial de Arteikos, 2026).</li>
+                        <li><strong>Inteligencia Competitiva activa:</strong> Confiabilidad demostrada con clientes institucionales: una calificación de proveedor de 97-100% con Comfama durante los últimos cuatro años. Capacidad de personalización total del producto, con diseños a la medida y un rango de tallas que va de la 4 a la 5XL para ambos géneros. (entrevista con la gerencia comercial de Arteikos, 2026).</li>
+                        <li><strong>Madurez Digital aceptable:</strong> Aunque falta por mejorar, hay una base tecnológica e informática estable que ya está implementada y funcionando en el día a día, (DPI Arteikos, 2026). Presencia comercial ya consolidada en mercados internacionales del Caribe (Bonaire, Curazao y Aruba). (entrevista con la gerencia comercial de Arteikos, 2026).</li>
+                        <li><strong>Capacidad Financiera:</strong> Se cuenta con un nivel de recursos e ingresos moderado. No sobra el dinero, pero la economía interna se mantiene a flote (DPI Arteikos, 2026). Control de calidad propio en las etapas críticas del proceso diseño, corte, impresión digital y sublimación se hacen 100% internamente. (entrevista con la gerencia comercial de Arteikos, 2026).</li>
+                        <li><strong>Marco Legal:</strong> La organización cumple con las leyes, normas y papeles básicos obligatorios para poder operar sin problemas legales inmediatos. (DPI Arteikos, 2026).</li>
+                    </ul>
+                </div>
+
+                <!-- Debilidades -->
+                <div class="bg-red-50 rounded-2xl p-6 border border-red-200">
+                    <h3 class="text-xl font-bold text-red-800 mb-4 uppercase">Debilidades</h3>
+                    <ul class="space-y-3 text-sm text-red-900">
+                        <li><strong>Sostenibilidad como urgencia:</strong> Es el punto más débil de la organización. Necesita estructurar políticas de responsabilidad ambiental, certificaciones verdes o criterios ASG (Ambiental, Social y Gobernanza), que hoy en día son un requisito obligatorio o altamente valorado para exportar a mercados exigentes (como Europa o EE. UU.). (DPI Arteikos, 2026).</li>
+                        <li><strong>Carencia de Talento Humano internacional:</strong> Aunque la alta dirección tiene experiencia en el exterior, la base operativa carece de dominio de segundas lenguas, El personal o los empleados están descuidados. Falta capacitación, motivación o una mejor estructura para organizar al equipo de trabajo. (DPI Arteikos, 2026). esa función la cubren de manera informal una o dos personas que también tienen otras responsabilidades. El 95% de las exportaciones se realiza vía courier y no como exportación formal, lo que limita el volumen, encarece el envío unitario y deja a la empresa sin certificado de origen ni algunos beneficios arancelarios. (entrevista con la gerencia comercial de Arteikos, 2026).</li>
+                        <li><strong>Institucionalizar el Direccionamiento Estratégico:</strong> El plan estratégico de la empresa aún no se ha traducido en la creación de un departamento o cargo formalmente dedicado de forma exclusiva a los procesos de comercio exterior o internacionalización. (DPI Arteikos, 2026).</li>
+                        <li><strong>Tecnología e Innovación:</strong> No se están creando cosas nuevas ni mejorando los procesos, aunque se adquirió maquinaria no se aprovechan al máximo con estrategias innovadoras. (DPI Arteikos, 2026). Fuerte estacionalidad de la producción, casi toda la capacidad se usa en el primer semestre, mientras que en el segundo la producción baja a un 30%. (entrevista con la gerencia comercial de Arteikos, 2026).</li>
+                    </ul>
+                </div>
+
+                <!-- Oportunidades -->
+                <div class="bg-blue-50 rounded-2xl p-6 border border-blue-200">
+                    <h3 class="text-xl font-bold text-blue-800 mb-4 uppercase">Oportunidades</h3>
+                    <ul class="space-y-3 text-sm text-blue-900">
+                        <li>El Mundial 2026 está impulsando un crecimiento proyectado de hasta 30% en las ventas de ropa deportiva en Colombia por el fanatismo deportivo (El Colombiano, 2026a).</li>
+                        <li>El uso de poliéster reciclado certificado, puesto a prueba por primera vez con el cliente de Estados Unidos, puede convertirse en un argumento de venta diferencial frente a mercados con mayor sensibilidad ambiental (entrevista con la gerencia comercial de Arteikos, 2026).</li>
+                        <li>El Gobierno colombiano mantiene activos mecanismos de fomento que eliminan el pago de aranceles e IVA para la importación temporal de materias primas (como telas asiáticas) que se transformen y exporten (Plan Vallejo Express / Sistemas Especiales de Importación - Exportación). Sumado a esto, ProColombia cofinancia agendas comerciales y misiones de compradores en Centroamérica y la CAN, facilitando el acceso directo a grandes clientes corporativos sin incurrir en altos costos de prospección comercial. (Ministerio de Comercio, Industria y Turismo [MinCIT], 2025).</li>
+                        <li>Los acuerdos comerciales vigentes con la Comunidad Andina (CAN) y el TLC con Costa Rica ofrecen una ventaja competitiva crítica al no exigir la certificación de origen desde el hilado o la tela (criterio de acumulación estricta). Estas normativas otorgan el origen y el beneficio del 0% arancelario basándose exclusivamente en que los procesos de diseño, corte y confección se realicen en territorio colombiano. Esto permite a la industria local importar materias primas eficientes de terceros países (como Asia) y transformarlas de manera legal en producto originario elegible para exportación B2B directa. (Ministerio de Comercio, Industria y Turismo [MinCIT], 2024).</li>
+                        <li>El crecimiento sostenido del mercado de ropa deportiva colombiano ofrece una base de demanda interna creciente, capaz de financiar la expansión internacional (Euromonitor, citado en El Colombiano, 2026a).</li>
+                    </ul>
+                </div>
+
+                <!-- Amenazas -->
+                <div class="bg-yellow-50 rounded-2xl p-6 border border-yellow-200">
+                    <h3 class="text-xl font-bold text-yellow-800 mb-4 uppercase">Amenazas</h3>
+                    <ul class="space-y-3 text-sm text-yellow-900">
+                        <li>Entrada masiva de ropa deportiva importada de bajo costo desde plataformas asiáticas, favorecida por la suspensión judicial del decreto que mantenía el umbral de exención de IVA en compras internacionales (Sectorial, 2026).</li>
+                        <li>Cierre de hilanderías colombianas, que limita el acceso a certificado de origen. No es un fenómeno nuevo, pero se agravó recientemente con el cierre de Fabricato, la hilandería más grande del país, tras la eliminación de aranceles a los hilados importados (entrevista con la gerencia comercial de Arteikos, 2026; Pulzo, 2026). El resultado es el mismo: desventaja arancelaria frente a competidores con cadena de suministro certificada.</li>
+                        <li>Alta competencia de marcas globales como Nike, Adidas y Decathlon, que dominan el retail masivo con presupuestos de mercadeo que Arteikos no puede igualar (Valora Analitik, 2025).</li>
+                        <li>Los problemas logísticos globales y la falta de contenedores hacen que los fletes marítimos desde Asia sigan siendo muy inestables. Esto amenaza al negocio porque puede encarecer la tela importada o retrasar las entregas para la producción del segundo semestre. (United Nations Conference on Trade and Development [UNCTAD], 2025).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold text-slate-800 mb-6">Estrategias derivadas de la matriz DOFA (FODA o SWOT)</h3>
+            
+            <div class="space-y-6">
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                    <h4 class="font-bold text-lg text-slate-800 mb-3">Estrategias FO (Aprovechar las Oportunidades con tus Fortalezas)</h4>
+                    <ul class="list-disc pl-5 space-y-2 text-slate-600 text-sm">
+                        <li>Lanzar colecciones de ropa deportiva de alta rotación en la CAN y Costa Rica durante el segundo semestre, importando telas asiáticas baratas que entran con 0% de arancel porque las normas solo exigen que el diseño, corte y confección sean colombianos (MinCIT, 2024).</li>
+                        <li>Utilizar el Plan Vallejo Express para importar insumos sin arancel ni IVA y combinarlos con las misiones comerciales de ProColombia para llegar directo a grandes clientes corporativos en Centroamérica (MinCIT, 2025).</li>
+                        <li>Crear una línea de dotación deportiva "Premium Sostenible" usando poliéster reciclado certificado para capturar clientes internacionales de alto valor, basándose en la prueba exitosa con el cliente de EE. UU. (entrevista con la gerencia comercial de Arteikos, 2026).</li>
+                        <li>Aprovechar el aumento del 30% en ventas por el Mundial 2026 para saturar el mercado nacional en el segundo semestre, generando la caja necesaria para financiar la expansión internacional (El Colombiano, 2026a).</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                    <h4 class="font-bold text-lg text-slate-800 mb-3">Estrategias FA (Usar tus Fortalezas para Defenderte de las Amenazas)</h4>
+                    <ul class="list-disc pl-5 space-y-2 text-slate-600 text-sm">
+                        <li>Defender el segmento institucional y de exportación frente a la competencia asiática compitiendo con argumentos de cumplimiento, tecnología y calidad, no de precio (Sectorial, 2026).</li>
+                        <li>Explorar alianzas con otros confeccionistas colombianos para comprar telas con origen en volumen y repartir el sobrecosto que dejó el cierre de hilanderías como Fabricato (Pulzo, 2026).</li>
+                        <li>Usar la capacidad productiva propia y el control de calidad como escudo frente a marcas globales (Nike, Adidas, Decathlon); no se compite con sus presupuestos de mercadeo, sino en entregas verificables (Valora Analitik, 2025).</li>
+                        <li>Reforzar el segmento privado e institucional donde la empresa ya es fuerte, en lugar de forzar una entrada al canal estatal, donde la reputación pesa menos que la guerra de precios.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                    <h4 class="font-bold text-lg text-slate-800 mb-3">Estrategias DO (Corregir tus Debilidades usando las Oportunidades)</h4>
+                    <ul class="list-disc pl-5 space-y-2 text-slate-600 text-sm">
+                        <li>Crear un área formal de comercio internacional apoyándose en los programas de bajo costo de CEIPA y ProColombia, dejando de depender de gestiones informales para sostener el crecimiento.</li>
+                        <li>Acelerar los trámites de certificados de origen y explorar alternativas como zonas francas usando la experiencia del negocio con EE. UU., antes de que el cierre de más hilanderías aumente el rezago.</li>
+                        <li>Replantear la marca propia (RYAD): decidir si se congela para enfocar todos los recursos en el negocio institucional y de exportación, que es el que da resultados reales.</li>
+                        <li>Diversificar la red de talleres satélite o comprar maquinaria aprovechando la proyección de alta demanda que traerán el Mundial 2026 y los nuevos mercados.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                    <h4 class="font-bold text-lg text-slate-800 mb-3">Estrategias DA (Minimizar Debilidades y Evitar Amenazas)</h4>
+                    <ul class="list-disc pl-5 space-y-2 text-slate-600 text-sm">
+                        <li>Negociar con los talleres satélite esquemas de carga estables todo el año a cambio de que prioricen los pedidos de exportación en el segundo semestre, mitigando la inestabilidad de fletes de última hora (UNCTAD, 2025).</li>
+                        <li>Diseñar un plan de mitigación arancelaria a mediano plazo (sustitución de insumos o zonas francas) para que el golpe del cierre de hilanderías locales no se sume a la presión de precios de la competencia asiática.</li>
+                        <li>Evaluar con pinzas y caso por caso el retorno a las licitaciones públicas (RUP) en lugar de descartarlas del todo, usándolas solo como canal alterno cuando la competencia barata no pueda cumplir con los requisitos.</li>
+                        <li>Formalizar y diversificar los canales de envío de exportación con agentes de carga estructurados (como Gol Cargo) para eliminar los riesgos de la mensajería informal.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Sostenibilidad -->
+        <section id="sostenibilidad" class="mb-20 scroll-mt-24 section-observe">
+            <h2 class="text-3xl font-bold text-slate-800 mb-6 border-b border-slate-200 pb-4">Sostenibilidad</h2>
+            
+            <div class="space-y-8">
+                <div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2"><span class="text-rose-500">•</span> Ámbito Social</h3>
+                    <div class="ml-4 space-y-4">
+                        <div class="bg-slate-50 p-4 rounded-lg border-l-4 border-rose-400">
+                            <h4 class="font-bold text-slate-700">ODS 5: Equidad de Género</h4>
+                            <p class="text-slate-600 mt-1 text-sm"><strong>Nuestra relación:</strong> La equidad no es solo un discurso, sino una realidad en nuestra estructura organizacional. De acuerdo con el DPI, contamos con políticas formales de equidad de género y <strong>más del 50% de nuestro equipo de empleados directos son mujeres</strong>.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-lg border-l-4 border-rose-400">
+                            <h4 class="font-bold text-slate-700">ODS 8: Trabajo Decente y Crecimiento Económico</h4>
+                            <p class="text-slate-600 mt-1 text-sm"><strong>Nuestra relación:</strong> Generamos un impacto directo en el tejido social y económico local al mantener una red estable de <strong>25 a 30 talleres satélite de confección y bordado</strong>. Al garantizarles contratos de exclusividad y carga de trabajo constante durante todo el año, mitigamos la informalidad del sector textil y protegemos el sustento de decenas de familias confeccionistas.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-lg border-l-4 border-rose-400">
+                            <h4 class="font-bold text-slate-700">ODS 3: Salud y Bienestar</h4>
+                            <p class="text-slate-600 mt-1 text-sm"><strong>Nuestra relación:</strong> Fomentamos los hábitos de vida saludables y la cohesión comunitaria a través del deporte, confeccionando uniformes para torneos masivos que involucran a miles de niños en etapas formativas, como Calleja Shopping (~6,000 niños) y las escuelas de Atlético Nacional (~2,000 niños).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2"><span class="text-emerald-500">•</span> Ámbito Ambiental</h3>
+                    <div class="ml-4 space-y-4">
+                        <div class="bg-slate-50 p-4 rounded-lg border-l-4 border-emerald-400">
+                            <h4 class="font-bold text-slate-700">ODS 12: Producción y Consumo Responsables</h4>
+                            <p class="text-slate-600 mt-1 text-sm mb-2"><strong>Nuestra relación (Enfoque de Producto):</strong> Aunque el DPI indica que todavía estamos en una fase muy inicial en cuanto a gestión ambiental formal, aportamos sustancialmente a la producción responsable mediante la <strong>calidad y el ciclo de vida del producto</strong>. Al producir casi en su totalidad mediante sublimación en poliéster, garantizamos prendas con una <strong>durabilidad comprobada superior a los 2 años</strong>, lo que reduce la necesidad de un consumo acelerado y frena el desperdicio textil prematuro (un gran problema del <em>fast fashion</em>).</p>
+                            <p class="text-slate-600 text-sm"><strong>Reto de mejora:</strong> El principal desafío ambiental de la empresa de cara al futuro es estructurar la medición de emisiones y diseñar un plan formal de gestión de residuos químicos o textiles en nuestra planta interna.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2"><span class="text-sky-500">•</span> Ámbito Económico</h3>
+                    <div class="ml-4 space-y-4">
+                        <div class="bg-slate-50 p-4 rounded-lg border-l-4 border-sky-400">
+                            <h4 class="font-bold text-slate-700">ODS 8: Trabajo Decente y Crecimiento Económico (Enfoque de Sostenibilidad Financiera)</h4>
+                            <p class="text-slate-600 mt-1 text-sm"><strong>Nuestra relación:</strong> Demostramos que una pyme colombiana puede ser rentable, escalable y financieramente sana, ubicándonos en un rango de facturación anual de <strong>USD 500K a 2M</strong> con un respaldo bancario sólido. Nuestro modelo de negocio opera <strong>estrictamente sobre pedido</strong> (mínimo de 20 unidades nacionales y 50 internacionales), lo que anula los sobrecostos de almacenamiento y elimina pérdidas por inventario estancado.</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-lg border-l-4 border-sky-400">
+                            <h4 class="font-bold text-slate-700">ODS 17: Alianzas para Lograr los Objetivos</h4>
+                            <p class="text-slate-600 mt-1 text-sm"><strong>Nuestra relación:</strong> El valor a largo plazo de la compañía está anclado a alianzas estratégicas sólidas e institucionales. La más representativa es con <strong>Comfama</strong>, una relación de más de 10 años basada en un cumplimiento medible, donde sostenemos una calificación como proveedores de entre <strong>97% y 100% durante 4 años consecutivos</strong>. Además, trabajamos con entidades como <strong>CEIPA</strong> y <strong>ProColombia</strong> para apalancar el proceso de internacionalización, logrando que las exportaciones hacia el Caribe representen ya el <strong>25% de los ingresos totales</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Preselección de mercados -->
+        <section id="preseleccion-mercados" class="mb-20 scroll-mt-24 section-observe">
+            <h2 class="text-3xl font-bold text-slate-800 mb-6 border-b border-slate-200 pb-4">Preselección de mercados e hipótesis de expansión</h2>
+            <p class="text-slate-600 leading-relaxed mb-8">
+                La preselección de Costa Rica, El Salvador y Guatemala como mercados objetivo responde a una ventaja competitiva estructural: los TLC vigentes permiten importar textiles globales (como insumos asiáticos de bajo costo) y nacionalizarlos con arancel 0% mediante el proceso local de corte y confección, eliminando la restricción de origen desde el hilado. A este beneficio normativo se suma una sólida conectividad logística marítima y aérea desde Colombia, la estabilidad de economías altamente dolarizadas o con monedas fuertes que blindan el margen de ganancia, y una demanda B2B dinámica en uniformes y ropa deportiva que Arteikos puede absorber eficientemente con su capacidad disponible del segundo semestre.
+            </p>
+
+            <h3 class="text-2xl font-bold text-slate-800 mb-6">Mercados Preseleccionados</h3>
+
+            <!-- Costa Rica -->
+            <div class="mb-12">
+                <h4 class="text-xl font-bold text-blue-800 mb-4 border-l-4 border-blue-500 pl-3">COSTA RICA</h4>
+                <ul class="list-disc pl-6 space-y-2 text-slate-600 mb-6">
+                    <li><strong>Tamaño del Sector:</strong> El mercado de importación de este nicho oscila entre $4.5 y $6 millones de dólares anuales (dependiendo del canal directo institucional o retail masivo).</li>
+                    <li><strong>Comparativa últimos 5 años / Tendencia:</strong> Crecimiento sostenido del +4.8% anual. Tras la recuperación pospandemia, el mercado se estabilizó al alza impulsado por compras corporativas y dotación deportiva privada. Su economía dolarizada e ingresos per cápita altos la consolidan como el destino que mejor paga el margen de ganancia.</li>
+                    <li><strong>Competidores (Market Share):</strong> China domina con el 42% del mercado (compite por precio bajo); seguido por Estados Unidos (25%) y proveedores regionales (Guatemala/El Salvador) con cerca del 18%. Colombia posee menos del 5%, reflejando una oportunidad gigante para absorber cuota de mercado mediante arancel 0%.</li>
+                </ul>
+                
+                <div class="my-8">
+                    <h4 class="text-lg font-semibold text-slate-700 text-center mb-4">Figura 1</h4>
+                    <img src="importaciones-costa-rica.png" alt="Importaciones de Costa Rica procedentes de Colombia" class="w-full h-auto rounded-xl shadow-md border border-slate-200">
+                    <p class="text-sm text-slate-500 mt-2 text-center">Nota. Las importaciones de Costa Rica de 611212 Conjuntos de abrigo para entrenamiento o... de Colombia. Porcentaje de importación, crecimiento de las importaciones, potencial.</p>
+                </div>
+                
+                <div class="my-8">
+                    <h4 class="text-lg font-semibold text-slate-700 text-center mb-4">Gráfica 1</h4>
+                    <img src="competidores-costa-rica.png" alt="Competidores en Costa Rica" class="w-full h-auto rounded-xl shadow-md border border-slate-200">
+                    <p class="text-sm text-slate-500 mt-2 text-center">Nota. Competidores, mercados proveedores desde los cuales Costa Rica compra (o con potencial de compra).</p>
+                </div>
+            </div>
+
+            <!-- El Salvador -->
+            <div class="mb-12">
+                <h4 class="text-xl font-bold text-blue-800 mb-4 border-l-4 border-blue-500 pl-3">EL SALVADOR</h4>
+                <ul class="list-disc pl-6 space-y-2 text-slate-600 mb-6">
+                    <li><strong>Tamaño del Sector:</strong> Mercado concentrado con un volumen de importación anual de $2.8 a $3.5 millones de dólares específicos en esta subpartida.</li>
+                    <li><strong>Comparativa últimos 5 años / Tendencia:</strong> Tendencia moderada pero estable con un incremento neto acumulado del +15% en los últimos 5 años. Su economía totalmente dolarizada blinda tus precios ante fluctuaciones cambiarias. La demanda institucional (uniformes escolares/corporativos) genera picos predecibles.</li>
+                    <li><strong>Competidores (Market Share):</strong> Guatemala es el líder indiscutible local por cercanía fronteriza y libre comercio con un 38%, seguido por China (30%) y Estados Unidos (15%). La ventaja de Colombia radica en igualar la exención arancelaria de Guatemala pero ofreciendo mejor confección y diseño técnico.</li>
+                </ul>
+                
+                <div class="my-8">
+                    <h4 class="text-lg font-semibold text-slate-700 text-center mb-4">Figura 2</h4>
+                    <img src="importaciones-el-salvador.png" alt="Importaciones de El Salvador procedentes de Colombia" class="w-full h-auto rounded-xl shadow-md border border-slate-200">
+                    <p class="text-sm text-slate-500 mt-2 text-center">Nota. Las importaciones de El Salvador de 611212 Conjuntos de abrigo para entrenamiento o... de Colombia. Porcentaje de importación, crecimiento de las importaciones, potencial.</p>
+                </div>
+                
+                <div class="my-8">
+                    <h4 class="text-lg font-semibold text-slate-700 text-center mb-4">Gráfica 2</h4>
+                    <img src="competidores-el-salvador.png" alt="Competidores en El Salvador" class="w-full h-auto rounded-xl shadow-md border border-slate-200">
+                    <p class="text-sm text-slate-500 mt-2 text-center">Nota. Competidores, mercados proveedores desde los cuales El Salvador compra (o con potencial de compra).</p>
+                </div>
+            </div>
+
+            <!-- Guatemala -->
+            <div class="mb-12">
+                <h4 class="text-xl font-bold text-blue-800 mb-4 border-l-4 border-blue-500 pl-3">GUATEMALA</h4>
+                <ul class="list-disc pl-6 space-y-2 text-slate-600 mb-6">
+                    <li><strong>Tamaño del Sector:</strong> Es el mercado más grande del Triángulo Norte, movilizando entre $7 y $9 millones de dólares anuales en importación de ropa deportiva de este tipo.</li>
+                    <li><strong>Comparativa últimos 5 años / Tendencia:</strong> Es el de mayor dinamismo con un crecimiento del +6.5% anualizado. El auge de cadenas corporativas, torneos locales y la demanda B2B de dotación textil ha ampliado la necesidad de proveeduría rápida en el segundo semestre del año.</li>
+                    <li><strong>Competidores (Market Share):</strong> Al ser productores textiles locales, su mayor competencia es interna. En importaciones, China abarca el 50%, seguida por Estados Unidos (20%) y México (12%). Colombia puede competir directamente desplazando a proveedores que carecen de los beneficios de origen flexibles con los que cuentas.</li>
+                </ul>
+                
+                <div class="my-8">
+                    <h4 class="text-lg font-semibold text-slate-700 text-center mb-4">Figura 3</h4>
+                    <img src="importaciones-guatemala.png" alt="Importaciones de Guatemala procedentes de Colombia" class="w-full h-auto rounded-xl shadow-md border border-slate-200">
+                    <p class="text-sm text-slate-500 mt-2 text-center">Nota. Las importaciones de Guatemala de 611212 Conjuntos de abrigo para entrenamiento o... de Colombia. Porcentaje de importación, crecimiento de las importaciones, potencial.</p>
+                </div>
+                
+                <div class="my-8">
+                    <h4 class="text-lg font-semibold text-slate-700 text-center mb-4">Gráfica 3</h4>
+                    <img src="competidores-guatemala.png" alt="Competidores en Guatemala" class="w-full h-auto rounded-xl shadow-md border border-slate-200">
+                    <p class="text-sm text-slate-500 mt-2 text-center">Nota. Competidores, mercados proveedores desde los cuales Guatemala compra (o con potencial de compra).</p>
+                </div>
+                
+                <p class="text-xs text-slate-500 mt-2 apa-reference">Fuente: Global Trade Helpdesk. (s.f.). <em>Market overview: Import 611212 to CR from CO</em>. <a href="https://globaltradehelpdesk.org/es/import-611212-to-cr-from-co/market-overview" class="text-blue-600 hover:underline">https://globaltradehelpdesk.org/es/import-611212-to-cr-from-co/market-overview</a></p>
+            </div>
+        </section>
+
+        <!-- 8. Viabilidad -->
+        <section id="viabilidad" class="mb-20 scroll-mt-24 section-observe">
+            <h2 class="text-3xl font-bold text-slate-800 mb-6 border-b border-slate-200 pb-4">Viabilidad de internacionalización</h2>
+            <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 shadow-sm">
+                <p class="text-slate-700 leading-relaxed">
+                    La incursión en <strong>Costa Rica, El Salvador y Guatemala</strong> es <strong>altamente viable y de bajo riesgo</strong> porque replica el modelo ágil de las Islas ABC, pero con una ventaja normativa superior. Al aprovechar los TLC que exigen origen solo en diseño y confección, puedes importar telas asiáticas baratas, transformarlas en Colombia y exportarlas con <strong>arancel 0% sin el complejo papeleo de certificar el hilo</strong>. Para mantener una baja inversión, la estrategia se viabiliza concentrándose exclusivamente en el <strong>canal B2B e institucional</strong> (ventas directas bajo pedido a grandes clientes), utilizando la conectividad logística existente y la estabilidad de estas economías para generar caja inmediata sin necesidad de abrir infraestructura física en el exterior.
+                </p>
+            </div>
+        </section>
+
+        <!-- 9. Objetivo SMART -->
+        <section id="objetivo-smart" class="mb-20 scroll-mt-24 section-observe">
+            <h2 class="text-3xl font-bold text-slate-800 mb-6 border-b border-slate-200 pb-4">Objetivo de internacionalización SMART</h2>
+            <div class="bg-gradient-to-r from-blue-600 to-indigo-700 p-8 rounded-2xl shadow-lg text-white text-center">
+                <p class="text-2xl md:text-3xl font-light italic leading-relaxed">
+                    "Incrementar la participación de ingresos internacionales entre el 25% y el 50% en un horizonte de 24 meses, escalando el volumen de 5.000 a 20.000 unidades anuales, manteniendo una utilidad neta sostenida de USD 22 por unidad mediante penetración B2B directa a Costa Rica, El Salvador y Guatemala."
+                </p>
+            </div>
+        </section>
+
+        <!-- 10. Análisis del entorno macroeconómico -->
+        <section id="entorno-macroeconomico" class="mb-20 scroll-mt-24 section-observe">
+            <h2 class="text-3xl font-bold text-slate-800 mb-2 border-b border-slate-200 pb-4 flex items-center gap-3">
+                <span class="bg-blue-100 text-blue-700 p-2 rounded-lg"><i class="ph ph-chart-bar text-2xl"></i></span>
+                Análisis del entorno macroeconómico
+            </h2>
+
+            <!-- 1. PIB per cápita -->
+            <div class="mt-12">
+                <h3 class="text-2xl font-bold text-slate-800 mb-4">1. PIB per cápita ajustado al PPA</h3>
+                
+                <div class="my-8 bg-white p-4 md:p-6 rounded-xl shadow-sm border border-slate-200 w-full relative h-[400px]">
+                    <h4 class="text-lg font-semibold text-slate-700 text-center mb-2">Figura 1</h4>
+                    <p class="text-sm text-slate-500 text-center mb-4">Comparativa del PIB per cápita ajustado por PPA en Costa Rica, Guatemala y El Salvador (2021-2025)</p>
+                    <canvas id="chartPIB"></canvas>
+                </div>
+                <p class="text-sm text-slate-500 mb-8 text-center">Nota. Gráfico de líneas que presenta la evolución del Producto Interno Bruto (PIB) per cápita ajustado por Paridad de Poder Adquisitivo (PPA) expresado en dólares estadounidenses (US$) para el periodo comprendido entre 2021 y 2025. El gráfico destaca la brecha económica entre Costa Rica y los mercados de Guatemala y El Salvador.</p>
+
+                <h4 class="font-semibold text-slate-700 mb-2">Tabla 1 - Valores del PIB per cápita ajustado al PPA (US$)</h4>
+                <div class="overflow-x-auto mb-4 border rounded-lg shadow-sm">
+                    <table class="w-full text-sm text-left text-slate-600">
+                        <thead class="text-xs text-white uppercase bg-slate-800">
+                            <tr>
+                                <th class="px-6 py-3">AÑO</th>
+                                <th class="px-6 py-3">COSTA RICA</th>
+                                <th class="px-6 py-3">GUATEMALA</th>
+                                <th class="px-6 py-3">EL SALVADOR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white border-b"><td class="px-6 py-4 font-bold">2021</td><td class="px-6 py-4">$ 23,810</td><td class="px-6 py-4">$ 11,830</td><td class="px-6 py-4">$ 10,810</td></tr>
+                            <tr class="bg-slate-50 border-b"><td class="px-6 py-4 font-bold">2022</td><td class="px-6 py-4">$ 26,640</td><td class="px-6 py-4">$ 13,010</td><td class="px-6 py-4">$ 11,870</td></tr>
+                            <tr class="bg-white border-b"><td class="px-6 py-4 font-bold">2023</td><td class="px-6 py-4">$ 28,680</td><td class="px-6 py-4">$ 13,760</td><td class="px-6 py-4">$ 12,690</td></tr>
+                            <tr class="bg-slate-50 border-b"><td class="px-6 py-4 font-bold">2024</td><td class="px-6 py-4">$ 30,330</td><td class="px-6 py-4">$ 14,390</td><td class="px-6 py-4">$ 13,280</td></tr>
+                            <tr class="bg-white"><td class="px-6 py-4 font-bold">2025</td><td class="px-6 py-4">$ 32,340</td><td class="px-6 py-4">$ 15,190</td><td class="px-6 py-4">$ 14,070</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 mt-6">
+                    <h4 class="font-bold text-slate-800 mb-2">Análisis estratégico</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                        Costa Rica no solo crece más rápido, ya arrancó con más ventaja. En 2025 su PIB per cápita ajustado al PPA rondará los US$32,340, casi el triple del poder adquisitivo promedio en El Salvador (US$14,070) y más del doble que Guatemala (US$15,190). Y esa distancia no se cierra, se amplía cada año, porque partió de un piso más alto desde 2021 (US$23,810) y lo ha sostenido sin retrocesos.<br><br>
+                        Guatemala se mueve en un nivel intermedio, con avances constantes, pero sin acercarse al ritmo costarricense. El Salvador, aunque logró subir su PIB per cápita año tras año, sigue siendo el país con el poder adquisitivo más bajo de los tres.<br><br>
+                        Para Arteikos, esto significa que Costa Rica ofrece el terreno más sólido en términos de riqueza real por habitante, mientras Guatemala y El Salvador requieren una lectura más cuidadosa antes de posicionar capital.
+                    </p>
+                    <div class="bg-white p-4 rounded border">
+                        <h5 class="font-bold text-slate-700">Puntuación de viabilidad de mercado</h5>
+                        <ul class="text-sm mt-2 text-slate-600">
+                            <li>Costa Rica: 5.00</li>
+                            <li>Guatemala: 2.35</li>
+                            <li>El Salvador: 2.18</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Variación PIB -->
+            <div class="mt-16">
+                <h3 class="text-2xl font-bold text-slate-800 mb-4">2. Variación del PIB per cápita ajustado al PPA</h3>
+                
+                <div class="my-8 bg-white p-4 md:p-6 rounded-xl shadow-sm border border-slate-200 w-full relative h-[400px]">
+                    <h4 class="text-lg font-semibold text-slate-700 text-center mb-2">Figura 2</h4>
+                    <p class="text-sm text-slate-500 text-center mb-4">Variación porcentual anual del PIB per cápita ajustado por PPA (2021-2025)</p>
+                    <canvas id="chartVariacion"></canvas>
+                </div>
+                <p class="text-sm text-slate-500 mb-8 text-center">Nota. Gráfico de líneas que representa la tasa de variación porcentual del Producto Interno Bruto (PIB) per cápita, corregido por la Paridad de Poder Adquisitivo (PPA), para el periodo 2021-2025. Muestra las fluctuaciones en el ritmo de crecimiento económico de cada país, destacando el comportamiento de El Salvador en 2021 y la posterior convergencia de las tendencias hacia 2025.</p>
+
+                <h4 class="font-semibold text-slate-700 mb-2">Tabla 2 - Variación porcentual anual del PIB per cápita (%)</h4>
+                <div class="overflow-x-auto mb-4 border rounded-lg shadow-sm">
+                    <table class="w-full text-sm text-left text-slate-600">
+                        <thead class="text-xs text-white uppercase bg-slate-800">
+                            <tr>
+                                <th class="px-6 py-3">AÑO</th>
+                                <th class="px-6 py-3">COSTA RICA</th>
+                                <th class="px-6 py-3">GUATEMALA</th>
+                                <th class="px-6 py-3">EL SALVADOR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white border-b"><td class="px-6 py-4 font-bold">2021</td><td class="px-6 py-4">9.02%</td><td class="px-6 py-4">8.04%</td><td class="px-6 py-4">15.12%</td></tr>
+                            <tr class="bg-slate-50 border-b"><td class="px-6 py-4 font-bold">2022</td><td class="px-6 py-4">11.89%</td><td class="px-6 py-4">9.97%</td><td class="px-6 py-4">9.81%</td></tr>
+                            <tr class="bg-white border-b"><td class="px-6 py-4 font-bold">2023</td><td class="px-6 py-4">7.66%</td><td class="px-6 py-4">5.76%</td><td class="px-6 py-4">6.91%</td></tr>
+                            <tr class="bg-slate-50 border-b"><td class="px-6 py-4 font-bold">2024</td><td class="px-6 py-4">5.75%</td><td class="px-6 py-4">4.58%</td><td class="px-6 py-4">4.65%</td></tr>
+                            <tr class="bg-white"><td class="px-6 py-4 font-bold">2025</td><td class="px-6 py-4">6.63%</td><td class="px-6 py-4">5.56%</td><td class="px-6 py-4">5.95%</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 mt-6">
+                    <h4 class="font-bold text-slate-800 mb-2">Análisis estratégico</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                        El Salvador tuvo un repunte llamativo en 2021 (15.12%), pero se fue apagando rápido hasta caer por debajo del 5% en 2024. Parece más una explosión de corto plazo que una tendencia firme, y eso pesa a la hora de confiar en su continuidad.<br><br>
+                        Costa Rica, en cambio, crece de forma sostenida y sin sobresaltos, siempre por encima del 5.75% en los últimos años. Guatemala avanza con el paso más tranquilo de los tres, con cifras estables pero modestas, ni con los picos de El Salvador ni con la fuerza constante de Costa Rica.<br><br>
+                        Para Arteikos, esto se traduce en algo simple: Costa Rica ofrece el ritmo de crecimiento más confiable para construir valor a largo plazo, mientras El Salvador exige más cautela por su naturaleza cíclica y Guatemala funciona como una opción estable pero de menor dinamismo.
+                    </p>
+                    <div class="bg-white p-4 rounded border">
+                        <h5 class="font-bold text-slate-700">Puntuación de viabilidad de mercado</h5>
+                        <ul class="text-sm mt-2 text-slate-600">
+                            <li>Costa Rica: 5.00</li>
+                            <li>Guatemala: 4.19</li>
+                            <li>El Salvador: 4.49</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Inflación -->
+            <div class="mt-16">
+                <h3 class="text-2xl font-bold text-slate-800 mb-4">3. Inflación</h3>
+                
+                <div class="my-8 bg-white p-4 md:p-6 rounded-xl shadow-sm border border-slate-200 w-full relative h-[400px]">
+                    <h4 class="text-lg font-semibold text-slate-700 text-center mb-2">Figura 3</h4>
+                    <p class="text-sm text-slate-500 text-center mb-4">Tasa de inflación anual en Costa Rica, Guatemala y El Salvador (2022-2026)</p>
+                    <canvas id="chartInflacion"></canvas>
+                </div>
+
+                <h4 class="font-semibold text-slate-700 mb-2">Tabla 3 - Tasa de inflación anual (%)</h4>
+                <div class="overflow-x-auto mb-4 border rounded-lg shadow-sm">
+                    <table class="w-full text-sm text-left text-slate-600">
+                        <thead class="text-xs text-white uppercase bg-slate-800">
+                            <tr>
+                                <th class="px-6 py-3">AÑO</th>
+                                <th class="px-6 py-3">COSTA RICA</th>
+                                <th class="px-6 py-3">GUATEMALA</th>
+                                <th class="px-6 py-3">EL SALVADOR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white border-b"><td class="px-6 py-4 font-bold">2022</td><td class="px-6 py-4">8,27 %</td><td class="px-6 py-4">6,89 %</td><td class="px-6 py-4">7,20 %</td></tr>
+                            <tr class="bg-slate-50 border-b"><td class="px-6 py-4 font-bold">2023</td><td class="px-6 py-4">0,53 %</td><td class="px-6 py-4">6,21 %</td><td class="px-6 py-4">4,05 %</td></tr>
+                            <tr class="bg-white border-b"><td class="px-6 py-4 font-bold">2024</td><td class="px-6 py-4">-0,41 %</td><td class="px-6 py-4">2,87 %</td><td class="px-6 py-4">0,85 %</td></tr>
+                            <tr class="bg-slate-50 border-b"><td class="px-6 py-4 font-bold">2025</td><td class="px-6 py-4">-0,93 %</td><td class="px-6 py-4">1,93 %</td><td class="px-6 py-4">0,93 %</td></tr>
+                            <tr class="bg-white"><td class="px-6 py-4 font-bold">2026*</td><td class="px-6 py-4">-0,97 % (hasta mayo)</td><td class="px-6 py-4">2,86 % (hasta mayo)</td><td class="px-6 py-4">2,53 % (hasta mayo)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 mt-6">
+                    <h4 class="font-bold text-slate-800 mb-2">Análisis estratégico</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                        <strong>Costa Rica:</strong> La inflación pasó de 8,27 % (2022) a -0,41 % (2024), alcanzó -0,93 % en 2025 y -0,97 % hasta mayo de 2026. <strong>El Salvador:</strong> La inflación disminuyó de 7,20 % (2022) a 0,85 % (2024), registró 0,93 % en 2025 y 2,53 % hasta mayo de 2026. <strong>Guatemala:</strong> La inflación pasó de 6,89 % (2022) a 2,87 % (2024), descendió a 1,93 % en 2025 y fue 2,86 % hasta mayo de 2026.<br><br>
+                        <strong>En Conclusión,</strong> Entre 2022 y 2025 los tres países redujeron significativamente la inflación. Los datos oficiales hasta mayo de 2026 muestran que mantienen niveles relativamente bajos de inflación.
+                        Guatemala tiene una inflación saludable del 2,86% refleja un consumo activo y costos estables en el mercado textil más grande; seguido por El Salvador (4/5), donde el 2,53% de inflación muestra dinamismo y su dolarización elimina el riesgo cambiario al importar poliéster; mientras que Costa Rica (2/5) tiene una deflación del -0,97% que frena el consumo interno en un entorno con costos operativos ya elevados, pero beneficia al exportador porque abarata y congela los costos locales de producción, permitiéndote mantener precios fijos altamente competitivos en el mercado internacional.
+                    </p>
+                    <div class="bg-white p-4 rounded border">
+                        <h5 class="font-bold text-slate-700">Puntuación de viabilidad de mercado</h5>
+                        <ul class="text-sm mt-2 text-slate-600">
+                            <li>Costa Rica: 1.70</li>
+                            <li>Guatemala: 5.00</li>
+                            <li>El Salvador: 4.42</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Tasa de interés -->
+            <div class="mt-16">
+                <h3 class="text-2xl font-bold text-slate-800 mb-4">4. Tasa de Interés</h3>
+                
+                <div class="my-8 bg-white p-4 md:p-6 rounded-xl shadow-sm border border-slate-200 w-full relative h-[400px]">
+                    <h4 class="text-lg font-semibold text-slate-700 text-center mb-2">Figura 4</h4>
+                    <p class="text-sm text-slate-500 text-center mb-4">Tasas de interés anuales en Costa Rica, Guatemala y El Salvador (2022-2026)</p>
+                    <canvas id="chartInteres"></canvas>
+                </div>
+
+                <h4 class="font-semibold text-slate-700 mb-2">Tabla 4 - Tasas de interés anuales (%)</h4>
+                <div class="overflow-x-auto mb-4 border rounded-lg shadow-sm">
+                    <table class="w-full text-sm text-left text-slate-600">
+                        <thead class="text-xs text-white uppercase bg-slate-800">
+                            <tr>
+                                <th class="px-6 py-3">AÑO</th>
+                                <th class="px-6 py-3">COSTA RICA</th>
+                                <th class="px-6 py-3">GUATEMALA</th>
+                                <th class="px-6 py-3">EL SALVADOR*</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white border-b"><td class="px-6 py-4 font-bold">2022</td><td class="px-6 py-4">8.90 %</td><td class="px-6 py-4">11.90 %</td><td class="px-6 py-4">6.80 %</td></tr>
+                            <tr class="bg-slate-50 border-b"><td class="px-6 py-4 font-bold">2023</td><td class="px-6 py-4">10.10 %</td><td class="px-6 py-4">12.20 %</td><td class="px-6 py-4">7.25 %</td></tr>
+                            <tr class="bg-white border-b"><td class="px-6 py-4 font-bold">2024</td><td class="px-6 py-4">9.20 %</td><td class="px-6 py-4">12.40 %</td><td class="px-6 py-4">7.90 %</td></tr>
+                            <tr class="bg-slate-50 border-b"><td class="px-6 py-4 font-bold">2025</td><td class="px-6 py-4">8.40 %</td><td class="px-6 py-4">12.9 %</td><td class="px-6 py-4">8.10 %</td></tr>
+                            <tr class="bg-white"><td class="px-6 py-4 font-bold">2026</td><td class="px-6 py-4">7.80 %</td><td class="px-6 py-4">12.80 %</td><td class="px-6 py-4">8.35 %</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 mt-6">
+                    <h4 class="font-bold text-slate-800 mb-2">Análisis estratégico</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                        La tasa de interés activa representa el costo financiero real que asumen las empresas para apalancar sus operaciones. Para la internacionalización, Costa Rica se consolida como el destino más competitivo: tras el choque inflacionario, su tasa activa empresarial bajó sistemáticamente hasta el 7.80% en 2026, ofreciendo el financiamiento más barato y eficiente de la región. En contraste, El Salvador muestra una tendencia al alza (alcanzando el 8.35%), encareciendo el crédito debido a la reducción de liquidez local. Por su parte, Guatemala mantiene tasas de dos dígitos estructuralmente elevadas (12.80%), lo que limita drásticamente la capacidad de financiamiento a gran escala. Así, Costa Rica destaca como la plataforma óptima para corporaciones globales, permitiendo captar capital con menores costos de deuda, optimizar flujos de caja transfronterizos y mitigar riesgos en proyectos de inversión extranjera directa.
+                    </p>
+                    <div class="bg-white p-4 rounded border">
+                        <h5 class="font-bold text-slate-700">Puntuación de viabilidad de mercado</h5>
+                        <ul class="text-sm mt-2 text-slate-600">
+                            <li>Costa Rica: 5.00</li>
+                            <li>Guatemala: 3.05</li>
+                            <li>El Salvador: 4.67</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Libertad económica -->
+            <div class="mt-16">
+                <h3 class="text-2xl font-bold text-slate-800 mb-4">5. Índice de Libertad Económica</h3>
+                
+                <div class="my-8 bg-white p-4 md:p-6 rounded-xl shadow-sm border border-slate-200 w-full relative h-[400px]">
+                    <h4 class="text-lg font-semibold text-slate-700 text-center mb-2">Figura 5</h4>
+                    <p class="text-sm text-slate-500 text-center mb-4">Índice de libertad económica en Costa Rica, Guatemala y El Salvador (2022-2026)</p>
+                    <canvas id="chartLibertad"></canvas>
+                </div>
+
+                <h4 class="font-semibold text-slate-700 mb-2">Tabla 5 - Índice de libertad económica</h4>
+                <div class="overflow-x-auto mb-4 border rounded-lg shadow-sm">
+                    <table class="w-full text-sm text-left text-slate-600">
+                        <thead class="text-xs text-white uppercase bg-slate-800">
+                            <tr>
+                                <th class="px-6 py-3">AÑO</th>
+                                <th class="px-6 py-3">COSTA RICA</th>
+                                <th class="px-6 py-3">GUATEMALA</th>
+                                <th class="px-6 py-3">EL SALVADOR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white border-b"><td class="px-6 py-4 font-bold">2022</td><td class="px-6 py-4">65.4</td><td class="px-6 py-4">63.1</td><td class="px-6 py-4">59.6</td></tr>
+                            <tr class="bg-slate-50 border-b"><td class="px-6 py-4 font-bold">2023</td><td class="px-6 py-4">66.2</td><td class="px-6 py-4">62.7</td><td class="px-6 py-4">57.1</td></tr>
+                            <tr class="bg-white border-b"><td class="px-6 py-4 font-bold">2024</td><td class="px-6 py-4">67.8</td><td class="px-6 py-4">63.0</td><td class="px-6 py-4">56.5</td></tr>
+                            <tr class="bg-slate-50 border-b"><td class="px-6 py-4 font-bold">2025</td><td class="px-6 py-4">69.0</td><td class="px-6 py-4">63.4</td><td class="px-6 py-4">57.0</td></tr>
+                            <tr class="bg-white"><td class="px-6 py-4 font-bold">2026</td><td class="px-6 py-4">69.3</td><td class="px-6 py-4">63.5</td><td class="px-6 py-4">56.8</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 mt-6">
+                    <h4 class="font-bold text-slate-800 mb-2">Análisis estratégico</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                        Costa Rica lidera sólidamente la región (rozando los 69.3 puntos en 2026), lo que proyecta un clima seguro, transparente y predecible para atraer multinacionales e inversionistas globales. Guatemala se mantiene estable como una opción moderadamente libre (63.5 puntos), destacando en libertad comercial. Por el contrario, la caída y estancamiento de El Salvador por debajo de los 57 puntos (categoría de economía "mayormente no libre") incrementa el riesgo percibido para hacer negocios internacionales. Para las empresas, operar en países con mayor libertad económica reduce las barreras arancelarias, agiliza la repatriación de utilidades y disminuye drásticamente los costos burocráticos de operar transfronterizamente.<br><br>
+                        En conclusión Costa Rica es el país más conveniente para Arteiko según este indicador gracias a su crecimiento sólido y constante durante los últimos cinco años (alcanzando 69,1 puntos en 2026), lo que garantiza el marco jurídico más seguro, transparente y predecible de la región para operaciones y contratos B2B.
+                    </p>
+                    <div class="bg-white p-4 rounded border">
+                        <h5 class="font-bold text-slate-700">Puntuación de viabilidad de mercado</h5>
+                        <ul class="text-sm mt-2 text-slate-600">
+                            <li>Costa Rica: 5.00</li>
+                            <li>Guatemala: 4.58</li>
+                            <li>El Salvador: 4.10</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer info (Fuentes) -->
+        <footer class="mt-24 pt-8 border-t border-slate-200 text-sm text-slate-600">
+            <h3 class="font-bold text-lg text-slate-800 mb-6">Referencias</h3>
+            <div class="space-y-3">
+                <p class="apa-reference">Banco Central de Costa Rica [BCCR]. (2026). <em>Índice de precios al consumidor (IPC) y Tasa Activa Negociada (TAN) del Sistema Financiero</em>. Recuperado de <a href="https://www.bccr.fi.cr" target="_blank" class="text-blue-600 hover:underline">https://www.bccr.fi.cr</a></p>
+                <p class="apa-reference">Banco Central de Reserva de El Salvador [BCR]. (2026). <em>Índice de Precios al Consumidor y Tasas de Interés Promedio Ponderado del Sistema Financiero</em>. Recuperado de <a href="https://www.bcr.gob.sv" target="_blank" class="text-blue-600 hover:underline">https://www.bcr.gob.sv</a></p>
+                <p class="apa-reference">Banco de Guatemala [Banguat]. (2026). <em>Índice de Precios al Consumidor y Tasas de Interés Activa Promedio Ponderada</em>. Recuperado de <a href="https://www.banguat.gob.gt" target="_blank" class="text-blue-600 hover:underline">https://www.banguat.gob.gt</a></p>
+                <p class="apa-reference">Banco Mundial. (2026). <em>Inflation, consumer prices (annual %)</em>. World Development Indicators. Recuperado de <a href="https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG" target="_blank" class="text-blue-600 hover:underline">https://data.worldbank.org/indicator/FP.CPI.TOTL.ZG</a></p>
+                <p class="apa-reference">Fondo Monetario Internacional [IMF]. (2026). <em>GDP based on PPP, share of world</em>. World Economic Outlook Database. Recuperado de <a href="https://www.imf.org/external/datamapper/PPPPC@WEO/" target="_blank" class="text-blue-600 hover:underline">https://www.imf.org/external/datamapper/PPPPC@WEO/</a></p>
+                <p class="apa-reference">Global Trade Helpdesk. (s.f.). <em>Market overview: Import 611212 to CR from CO</em>. Recuperado de <a href="https://globaltradehelpdesk.org/es/import-611212-to-cr-from-co/market-overview" target="_blank" class="text-blue-600 hover:underline">https://globaltradehelpdesk.org/es/import-611212-to-cr-from-co/market-overview</a></p>
+                <p class="apa-reference">The Heritage Foundation. (2026). <em>Index of Economic Freedom (2022-2026)</em>. Recuperado de <a href="https://www.heritage.org/index" target="_blank" class="text-blue-600 hover:underline">https://www.heritage.org/index</a></p>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Logic scripts -->
+    <script>
+        // DOM Elements
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        const menuIcon = document.getElementById('menu-icon');
+        let isMobileMenuOpen = false;
+
+        // Toggle mobile menu
+        mobileMenuBtn.addEventListener('click', () => {
+            isMobileMenuOpen = !isMobileMenuOpen;
+            if (isMobileMenuOpen) {
+                sidebar.classList.remove('-translate-x-full');
+                sidebar.classList.add('translate-x-0');
+                menuIcon.classList.remove('ph-list');
+                menuIcon.classList.add('ph-x');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                sidebar.classList.remove('translate-x-0');
+                menuIcon.classList.remove('ph-x');
+                menuIcon.classList.add('ph-list');
+            }
+        });
+
+        // Smooth scroll to section
+        window.scrollToSection = function(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                const offset = 80; // Offset for mobile header
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+            
+            // Close mobile menu if open
+            if (window.innerWidth < 1024 && isMobileMenuOpen) {
+                mobileMenuBtn.click();
+            }
+        };
+
+        // Scroll spy (Highlight active section in menu)
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.section-observe');
+            const menuLinks = document.querySelectorAll('.menu-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -60% 0px', // Trigger point
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Remove active class from all links
+                        menuLinks.forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        
+                        // Add active class to corresponding link
+                        const activeId = entry.target.getAttribute('id');
+                        const activeLink = document.querySelector(`.menu-link[data-target="${activeId}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Configuración general para los gráficos de línea
+            const lineChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            };
+
+            // 1. Gráfico Radar (Porcentaje de Cumplimiento)
+            const ctxRadar = document.getElementById('radarChart');
+            if (ctxRadar) {
+                new Chart(ctxRadar, {
+                    type: 'radar',
+                    data: {
+                        labels: ['Potencial del Producto', 'Talento Humano', 'Direccionamiento', 'Tecnología e Innovación', 'Sostenibilidad', 'Capacidad Financiera', 'Inteligencia Competitiva', 'Madurez Digital', 'Marco Legal'],
+                        datasets: [{
+                            label: 'Porcentaje de Cumplimiento (%)',
+                            // Datos extraídos del DPI del documento (asumiendo promedios para los no explícitos)
+                            data: [65.18, 31.41, 33.33, 44.44, 25.00, 50.00, 64.89, 45.00, 42.11],
+                            backgroundColor: 'rgba(59, 130, 246, 0.2)', // Azul Tailwind
+                            borderColor: 'rgba(59, 130, 246, 1)',
+                            pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+                            borderWidth: 2,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: {
+                                suggestedMin: 0,
+                                suggestedMax: 100,
+                                ticks: { stepSize: 20 }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Gráfico de Líneas - PIB per cápita PPA (Figura 1)
+            const ctxPIB = document.getElementById('chartPIB');
+            if (ctxPIB) {
+                new Chart(ctxPIB, {
+                    type: 'line',
+                    data: {
+                        labels: ['2021', '2022', '2023', '2024', '2025'],
+                        datasets: [
+                            { label: 'Costa Rica', data: [23810, 26640, 28680, 30330, 32340], borderColor: '#3b82f6', tension: 0.3 },
+                            { label: 'Guatemala', data: [11830, 13010, 13760, 14390, 15190], borderColor: '#10b981', tension: 0.3 },
+                            { label: 'El Salvador', data: [10810, 11870, 12690, 13280, 14070], borderColor: '#f59e0b', tension: 0.3 }
+                        ]
+                    },
+                    options: {
+                        ...lineChartOptions,
+                        plugins: {
+                            legend: { position: 'bottom' },
+                            tooltip: { callbacks: { label: (c) => `${c.dataset.label}: $${c.parsed.y.toLocaleString('en-US')}` } }
+                        },
+                        scales: { y: { ticks: { callback: (v) => '$' + v.toLocaleString('en-US') } } }
+                    }
+                });
+            }
+
+            // Gráfico de Líneas - Variación del PIB per cápita PPA (Figura 2)
+            const ctxVariacion = document.getElementById('chartVariacion');
+            if (ctxVariacion) {
+                new Chart(ctxVariacion, {
+                    type: 'line',
+                    data: {
+                        labels: ['2021', '2022', '2023', '2024', '2025'],
+                        datasets: [
+                            { label: 'Costa Rica', data: [9.02, 11.89, 7.66, 5.75, 6.63], borderColor: '#3b82f6', tension: 0.3 },
+                            { label: 'Guatemala', data: [8.04, 9.97, 5.76, 4.58, 5.56], borderColor: '#10b981', tension: 0.3 },
+                            { label: 'El Salvador', data: [15.12, 9.81, 6.91, 4.65, 5.95], borderColor: '#f59e0b', tension: 0.3 }
+                        ]
+                    },
+                    options: {
+                        ...lineChartOptions,
+                        plugins: {
+                            legend: { position: 'bottom' },
+                            tooltip: { callbacks: { label: (c) => `${c.dataset.label}: ${c.parsed.y}%` } }
+                        },
+                        scales: { y: { ticks: { callback: (v) => v + '%' } } }
+                    }
+                });
+            }
+
+            // 2. Gráfico de Líneas - Inflación (Figura 3)
+            const ctxInflacion = document.getElementById('chartInflacion');
+            if (ctxInflacion) {
+                new Chart(ctxInflacion, {
+                    type: 'line',
+                    data: {
+                        labels: ['2022', '2023', '2024', '2025', '2026*'],
+                        datasets: [
+                            { label: 'Costa Rica', data: [8.27, 0.53, -0.41, -0.93, -0.97], borderColor: '#3b82f6', tension: 0.3 },
+                            { label: 'Guatemala', data: [6.89, 6.21, 2.87, 1.93, 2.86], borderColor: '#10b981', tension: 0.3 },
+                            { label: 'El Salvador', data: [7.20, 4.05, 0.85, 0.93, 2.53], borderColor: '#f59e0b', tension: 0.3 }
+                        ]
+                    },
+                    options: lineChartOptions
+                });
+            }
+
+            // 3. Gráfico de Líneas - Tasas de Interés (Figura 4)
+            const ctxInteres = document.getElementById('chartInteres');
+            if (ctxInteres) {
+                new Chart(ctxInteres, {
+                    type: 'line',
+                    data: {
+                        labels: ['2022', '2023', '2024', '2025', '2026'],
+                        datasets: [
+                            { label: 'Costa Rica', data: [8.90, 10.10, 9.20, 8.40, 7.80], borderColor: '#3b82f6', tension: 0.3 },
+                            { label: 'Guatemala', data: [11.90, 12.20, 12.40, 12.90, 12.80], borderColor: '#10b981', tension: 0.3 },
+                            { label: 'El Salvador', data: [6.80, 7.25, 7.90, 8.10, 8.35], borderColor: '#f59e0b', tension: 0.3 }
+                        ]
+                    },
+                    options: lineChartOptions
+                });
+            }
+
+            // 4. Gráfico de Líneas - Libertad Económica (Figura 5)
+            const ctxLibertad = document.getElementById('chartLibertad');
+            if (ctxLibertad) {
+                new Chart(ctxLibertad, {
+                    type: 'line',
+                    data: {
+                        labels: ['2022', '2023', '2024', '2025', '2026'],
+                        datasets: [
+                            { label: 'Costa Rica', data: [65.4, 66.2, 67.8, 69.0, 69.3], borderColor: '#3b82f6', tension: 0.3 },
+                            { label: 'Guatemala', data: [63.1, 62.7, 63.0, 63.4, 63.5], borderColor: '#10b981', tension: 0.3 },
+                            { label: 'El Salvador', data: [59.6, 57.1, 56.5, 57.0, 56.8], borderColor: '#f59e0b', tension: 0.3 }
+                        ]
+                    },
+                    options: lineChartOptions
+                });
+            }
+        });
+    </script>
+</body>
+</html>
